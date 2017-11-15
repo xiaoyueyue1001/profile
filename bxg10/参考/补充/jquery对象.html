@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="../js/lib/jquery-2.1.4.js"></script>
+<script>
+    var str="<input type='button' value='按钮'/>";
+
+    //错误的写法
+//    var $str=$(str);        //将字符串转换为dom元素，并把该元素放在jquery对象中
+//    $str.on("click",function(){
+//        alert("点击了按钮")
+//    });
+//
+//    $("body").append(str);      //将字符串转换为dom元素，dom元素放到页面中
+
+
+    //正确的写法
+    var $str=$(str);            //将字符串转化为dom元素，并把该元素放在jquery对象中
+    $str.on("click",function(){
+        alert("点击按钮");
+    });
+    $("body").append($str);     //参数是jquery对象，所以就是直接把该对象中元素放到页面中
+                            //-->绑定事件的元素和放到页面中的元素是同一个元素
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var o1=new Object();
+    var o2=new Object();
+    console.log(o1==o2);        //false
+
+
+    var div=document.createElement("div");
+    var div2=document.createElement("div");
+    console.log(div==div2);     //false
+</script>
+</html>

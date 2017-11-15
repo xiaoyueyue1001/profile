@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="../js/lib/jquery-2.1.4.js"></script>
+<script>
+    $.ajax({
+        url:"/api/teacher",
+        type:"get",
+        success:function(res){
+            if(res.code!=200) throw new Error(res.msg);
+
+            console.log("真正的业务逻辑");
+        }
+
+    });
+
+    var api={
+        ajax:function(url,type,data,callback){
+
+            $.ajax({
+                url:"/api/"+url,
+                type:type,
+                data:data,
+                success:function(res){
+                    if(res.code!=200) throw new Error(res.msg);
+
+                    callback(res);
+                }
+
+            });
+        },
+        get:function(url,data,callback){
+
+
+            //this-->get方法体内部-->get方法如何被调用的？api.get-->this:api
+
+            this.ajax(url,"get",data,callback);
+        },
+        post:function(url,data,callback){
+
+
+            //this-->get方法体内部-->get方法如何被调用的？api.get-->this:api
+
+            this.ajax(url,"post",data,callback);
+        }
+
+    };
+
+    api.get("teacher",{},function(res){
+        //获取到了讲师的数据
+
+    })
+
+//    api.ajax("teacher","get",{},function(res){
+//        //在这里获取返回值:success方法的回调函数
+//
+//    })
+</script>
+</html>

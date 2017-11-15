@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="../js/lib/jquery-2.1.4.js"></script>
+<script src="../js/lib/jquery.cookie.js"></script>
+<script>
+//    //1、设置会话cookie：
+//    $.cookie("gender","男");
+    //2、获取cookie：
+//    console.log($.cookie("gender"));
+
+    //3、设置长期cookie
+    //$.cookie("length","180",{expires:7});       //相对于当前设置的时间，7天后过期
+
+    //$.cookie("width","200",{expires:0.1});       //2.4h后过期
+
+    //4、删除cookie
+    $.removeCookie("width");
+</script>
+</html>

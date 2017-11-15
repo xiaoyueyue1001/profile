@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/uploadify/uploadify.css">
+</head>
+<body>
+    <input type="file" id="file_upload_1">
+
+    <input type="button" id="btn" value="上传">
+</body>
+<script src="../js/lib/jquery-2.1.4.js"></script>
+<script src="../assets/uploadify/jquery.uploadify.js"></script>
+<script>
+    //注意：该插件是一个基于flash开发的，所以一定要注意让页面支持flash
+
+    $("#file_upload_1").uploadify({
+        auto:false,     //选完文件是否自动上传，默认：true
+
+        buttonText:"选择文件",
+        fileObjName:"cs_cover_original",        //表示name值
+        formData:{cs_id:6},                     //上传文件的时候要传递的额外的参数
+        uploader      : '/api/uploader/cover',//要把文件上传到哪里去？
+        height        : 30,
+        swf           : '../assets/uploadify/uploadify.swf',
+        width         : 120,
+
+        itemTemplate:"<span></span>"    //这样的设置用户就看不到上传的细节
+    });
+
+    $("#btn").on("click",function(){
+
+        //实现上传？
+        $("#file_upload_1").uploadify("upload","*");//如果没有*一次只能上传一个,有*就会把队列中所有的文件都依次上传到服务器中
+    })
+</script>
+</html>

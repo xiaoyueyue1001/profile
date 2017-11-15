@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+<div id="main" style="width: 600px;height:400px;"></div>
+
+</body>
+<script src="../js/lib/jquery-2.1.4.js"></script>
+<script src="../js/lib/echarts.min.js"></script>
+<script type="text/javascript">
+    //1、准备数据
+    $.get("/api/teacher",function(res){
+        console.log(res);
+        //2、构建出饼图需要的数据
+        var data=[
+            {name:"男",value:0},
+            {name:"女",value:0}
+        ]
+
+        res.result.forEach(function(v){
+            //v:{}
+//            if(v.tc_gender==0){
+//                //男
+//                data[0].value++;
+//            }else{
+//                data[1].value++;
+//            }
+
+            //-->data[v.tc_gender==0?0:1].value++;
+            data[v.tc_gender].value++;
+        })
+
+
+        var main=$("#main").get(0);
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(main);
+
+        var option = {
+            title:{
+                text:"网站中一系列的比例",
+                textStyle:{
+                    color:"blue"
+                },
+                left:200,
+                top:10,
+                borderWidth:3,
+                subtext:"二级标题"
+            },
+            //悬浮框
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+            legend: {
+                orient: 'vertical',//排列方式，默认是水平：
+                x: 'left',      //定位方式，x表示水平对齐方式，y表示垂直对齐方式
+
+                //data应该与数据一一对应
+                data:['男','女']
+            },
+            series: [
+                {
+//                    name:'性别',
+                    type:'pie',
+                    radius: ['40%', '55%'],
+
+                    data:data
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    })
+
+
+
+</script>
+</html>
